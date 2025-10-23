@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traders Dex - Master the Markets with Real-Time Insights</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-icon">📈</span>
+                    <span class="logo-text">Traders<span class="highlight">Dex</span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#learn">Learn</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <button class="btn btn-secondary">Sign In</button>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-animation"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="badge">🚀 AI-Powered Trading Platform</div>
+                    <h1 class="hero-title">
+                        Master the Markets with
+                        <span class="gradient-text">Real-Time Intelligence</span>
+                    </h1>
+                    <p class="hero-description">
+                        Transform your trading journey with AI-driven insights, live market analysis,
+                        and personalized learning that adapts to current market conditions.
+                    </p>
+                    <div class="hero-cta">
+                        <button class="btn btn-primary btn-large">
+                            Start Trading Now
+                            <span class="btn-icon">→</span>
+                        </button>
+                        <button class="btn btn-outline btn-large">
+                            <span class="play-icon">▶</span>
+                            Watch Demo
+                        </button>
+                    </div>
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <span class="trust-number" data-target="50000">0</span>
+                            <span class="trust-label">Active Traders</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-number">$<span data-target="2.5">0</span>B</span>
+                            <span class="trust-label">Trading Volume</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-number" data-target="98">0</span>%
+                            <span class="trust-label">Success Rate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="trading-card">
+                        <div class="card-header">
+                            <h3>Live Market Pulse</h3>
+                            <span class="status-badge">● LIVE</span>
+                        </div>
+                        <div class="chart-placeholder">
+                            <canvas id="liveChart"></canvas>
+                        </div>
+                        <div class="market-stats">
+                            <div class="stat-item positive">
+                                <span class="stat-label">BTC/USD</span>
+                                <span class="stat-value">$67,234.50</span>
+                                <span class="stat-change">+2.4%</span>
+                            </div>
+                            <div class="stat-item negative">
+                                <span class="stat-label">ETH/USD</span>
+                                <span class="stat-value">$3,456.80</span>
+                                <span class="stat-change">-1.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FEATURES</span>
+                <h2 class="section-title">Everything You Need to <span class="gradient-text">Succeed</span></h2>
+                <p class="section-description">
+                    Powerful tools and insights designed to maximize your trading potential
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);">
+                        📊
+                    </div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Get instant market insights with AI-powered analysis that adapts to live market conditions and trends.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #93C572 0%, #6B9E4E 100%);">
+                        🎓
+                    </div>
+                    <h3>Adaptive Learning</h3>
+                    <p>Personalized courses that evolve with market dynamics, teaching you strategies that work right now.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);">
+                        🎯
+                    </div>
+                    <h3>Profit Optimization</h3>
+                    <p>AI-driven recommendations to maximize returns and minimize risks based on your trading style.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #FFB347 0%, #FF8C00 100%);">
+                        ⚡
+                    </div>
+                    <h3>Lightning Execution</h3>
+                    <p>Execute trades in milliseconds with our advanced infrastructure and real-time data feeds.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);">
+                        🔒
+                    </div>
+                    <h3>Bank-Grade Security</h3>
+                    <p>Your assets protected with military-grade encryption and multi-layer security protocols.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #93C572 0%, #6B9E4E 100%);">
+                        📱
+                    </div>
+                    <h3>Trade Anywhere</h3>
+                    <p>Seamless experience across all devices with our powerful mobile and desktop applications.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Preview -->
+    <section id="analytics" class="analytics">
+        <div class="container">
+            <div class="analytics-wrapper">
+                <div class="analytics-content">
+                    <span class="section-tag">ANALYTICS</span>
+                    <h2 class="section-title">Market Intelligence at <span class="gradient-text">Your Fingertips</span></h2>
+                    <p class="section-description">
+                        Harness the power of real-time data, advanced charting, and AI predictions to make informed decisions.
+                    </p>
+                    <div class="analytics-features">
+                        <div class="analytics-feature">
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <h4>Live Market Signals</h4>
+                                <p>Receive instant notifications on trending opportunities</p>
+                            </div>
+                        </div>
+                        <div class="analytics-feature">
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <h4>Pattern Recognition</h4>
+                                <p>AI identifies profitable patterns before they peak</p>
+                            </div>
+                        </div>
+                        <div class="analytics-feature">
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <h4>Risk Assessment</h4>
+                                <p>Real-time portfolio analysis and risk management</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Explore Analytics</button>
+                </div>
+                <div class="analytics-visual">
+                    <div class="dashboard-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="mockup-title">Trading Dashboard</span>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="metric-cards">
+                                <div class="metric-card">
+                                    <span class="metric-label">Portfolio Value</span>
+                                    <span class="metric-value">$124,567</span>
+                                    <span class="metric-change positive">+12.5%</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Today's Profit</span>
+                                    <span class="metric-value">$2,340</span>
+                                    <span class="metric-change positive">+5.8%</span>
+                                </div>
+                            </div>
+                            <div class="mockup-chart">
+                                <canvas id="dashboardChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Platform -->
+    <section id="learn" class="learning">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">LEARN</span>
+                <h2 class="section-title">Learn from the <span class="gradient-text">Market's Pulse</span></h2>
+                <p class="section-description">
+                    Our adaptive learning system teaches you strategies based on current market conditions
+                </p>
+            </div>
+            <div class="learning-grid">
+                <div class="learning-card">
+                    <div class="learning-image">
+                        <div class="learning-badge">BEGINNER</div>
+                    </div>
+                    <div class="learning-content">
+                        <h3>Market Fundamentals</h3>
+                        <p>Master the basics with real-world examples from today's markets</p>
+                        <div class="learning-meta">
+                            <span>⏱ 12 lessons</span>
+                            <span>👥 45K students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="learning-card">
+                    <div class="learning-image intermediate">
+                        <div class="learning-badge">INTERMEDIATE</div>
+                    </div>
+                    <div class="learning-content">
+                        <h3>Technical Analysis</h3>
+                        <p>Advanced charting and pattern recognition in live markets</p>
+                        <div class="learning-meta">
+                            <span>⏱ 24 lessons</span>
+                            <span>👥 32K students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="learning-card">
+                    <div class="learning-image advanced">
+                        <div class="learning-badge">ADVANCED</div>
+                    </div>
+                    <div class="learning-content">
+                        <h3>AI-Driven Strategies</h3>
+                        <p>Leverage AI and machine learning for competitive advantage</p>
+                        <div class="learning-meta">
+                            <span>⏱ 36 lessons</span>
+                            <span>👥 18K students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="statistics">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💎</div>
+                    <h3 class="stat-number" data-target="99.9">0</h3>
+                    <p class="stat-label">Uptime %</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <h3 class="stat-number" data-target="150">0</h3>
+                    <p class="stat-label">Countries Served</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <h3 class="stat-number" data-target="1">0</h3>
+                    <p class="stat-label">Million+ Trades/Day</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <h3 class="stat-number" data-target="24">0</h3>
+                    <p class="stat-label">Awards Won</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Trading?</h2>
+                <p>Join thousands of successful traders using Traders Dex to maximize their profits</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large">Start Free Trial</button>
+                    <button class="btn btn-outline-light btn-large">Schedule Demo</button>
+                </div>
+                <p class="cta-note">No credit card required • 14-day free trial • Cancel anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <span class="logo-icon">📈</span>
+                        <span class="logo-text">Traders<span class="highlight">Dex</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Empowering traders with real-time intelligence and adaptive learning.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">𝕏</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Analytics</a></li>
+                        <li><a href="#">Trading Tools</a></li>
+                        <li><a href="#">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Market Insights</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Traders Dex. All rights reserved.</p>
+                <p>Trading involves risk. Past performance does not guarantee future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
