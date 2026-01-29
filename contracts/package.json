@@ -4,6 +4,7 @@
   "description": "Invoice NFT Smart Contracts",
   "scripts": {
     "compile": "hardhat compile",
+    "compile:solc": "solcjs --bin --abi --include-path node_modules --base-path . contracts/InvoiceNFT.sol -o build",
     "test": "hardhat test",
     "clean": "hardhat clean"
   },
@@ -12,6 +13,7 @@
     "hardhat": "^2.19.0"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
+    "@openzeppelin/contracts": "^5.0.0",
+    "solc": "^0.8.20"
   }
 }
