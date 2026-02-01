@@ -1,458 +1,500 @@
-// Navbar scroll effect
-const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
+// ========================================
+// InvoiceFlow - Interactive JavaScript
+// Parallax, Animations & Demo Functionality
+// ========================================
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-
-    lastScroll = currentScroll;
+// DOM Ready
+document.addEventListener('DOMContentLoaded', () => {
+    initNavbar();
+    initParallax();
+    initScrollAnimations();
+    initCounters();
+    initDemo();
+    initSmoothScroll();
 });
 
-// Mobile menu toggle
-const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-const navLinks = document.querySelector('.nav-links');
+// ========================================
+// Navigation
+// ========================================
+function initNavbar() {
+    const navbar = document.getElementById('navbar');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.querySelector('.nav-links');
 
-if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
+    // Scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // Mobile menu toggle
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Active link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
     });
 }
 
-// Animated counter
-function animateCounter(element, target, duration = 2000, isDecimal = false) {
+// ========================================
+// Parallax Effects
+// ========================================
+function initParallax() {
+    const parallaxLayers = document.querySelectorAll('.parallax-layer');
+    const floatingCards = document.querySelectorAll('.float-card');
+    const parallaxBgs = document.querySelectorAll('.parallax-bg');
+
+    let ticking = false;
+
+    function updateParallax() {
+        const scrollY = window.pageYOffset;
+
+        // Parallax layers in hero
+        parallaxLayers.forEach(layer => {
+            const speed = parseFloat(layer.dataset.speed) || 0.5;
+            const yPos = -(scrollY * speed);
+            layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
+
+        // Floating cards parallax
+        floatingCards.forEach((card, index) => {
+            const speed = 0.1 + (index * 0.05);
+            const yPos = scrollY * speed;
+            const rotation = Math.sin(scrollY * 0.002 + index) * 3;
+            card.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
+        });
+
+        // Background parallax
+        parallaxBgs.forEach(bg => {
+            const speed = parseFloat(bg.dataset.speed) || 0.2;
+            const yPos = scrollY * speed;
+            bg.style.transform = `translate(-50%, calc(-50% + ${yPos}px))`;
+        });
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    });
+
+    // Mouse parallax for floating cards
+    document.addEventListener('mousemove', (e) => {
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        floatingCards.forEach((card, index) => {
+            const depth = 10 + (index * 5);
+            const moveX = mouseX * depth;
+            const moveY = mouseY * depth;
+            card.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    });
+}
+
+// ========================================
+// Scroll Animations
+// ========================================
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+
+                // Animate step line progress
+                if (entry.target.classList.contains('step-card')) {
+                    updateStepLine();
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe step cards
+    document.querySelectorAll('.step-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // Observe feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        featureObserver.observe(card);
+    });
+
+    // Observe benefit cards
+    document.querySelectorAll('.benefits-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(-30px)';
+
+        const benefitObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        benefitObserver.observe(card);
+    });
+}
+
+function updateStepLine() {
+    const stepCards = document.querySelectorAll('.step-card.visible');
+    const lineProgress = document.getElementById('lineProgress');
+
+    if (lineProgress) {
+        const progress = (stepCards.length / 3) * 100;
+        lineProgress.style.width = `${progress}%`;
+    }
+}
+
+// ========================================
+// Animated Counters
+// ========================================
+function initCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                animateCounter(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+}
+
+function animateCounter(element) {
+    const target = parseInt(element.dataset.count);
+    const duration = 2000;
+    const steps = 60;
+    const stepDuration = duration / steps;
     let current = 0;
-    const increment = target / (duration / 16);
+
+    const isLargeNumber = target > 10000;
+    const isCurrency = element.textContent.includes('$');
+
     const timer = setInterval(() => {
-        current += increment;
+        current += target / steps;
+
         if (current >= target) {
             current = target;
             clearInterval(timer);
         }
 
-        if (isDecimal) {
-            element.textContent = current.toFixed(1);
-        } else {
-            element.textContent = Math.floor(current).toLocaleString();
-        }
-    }, 16);
-}
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.2,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-
-            // Trigger counter animation for stats
-            const counters = entry.target.querySelectorAll('[data-target]');
-            counters.forEach(counter => {
-                const target = parseFloat(counter.getAttribute('data-target'));
-                const isDecimal = target % 1 !== 0;
-                animateCounter(counter, target, 2000, isDecimal);
-                counter.removeAttribute('data-target'); // Prevent re-animation
-            });
-        }
-    });
-}, observerOptions);
-
-// Observe elements
-document.querySelectorAll('.feature-card, .learning-card, .stat-card, .analytics-feature, .trust-indicators').forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-});
-
-// Live Chart Animation (Hero Section)
-const liveChartCanvas = document.getElementById('liveChart');
-if (liveChartCanvas) {
-    const ctx = liveChartCanvas.getContext('2d');
-    liveChartCanvas.width = liveChartCanvas.parentElement.offsetWidth - 40;
-    liveChartCanvas.height = 180;
-
-    const dataPoints = 30;
-    let chartData = Array.from({ length: dataPoints }, () => Math.random() * 100 + 50);
-
-    function drawChart() {
-        const width = liveChartCanvas.width;
-        const height = liveChartCanvas.height;
-        const padding = 20;
-
-        // Clear canvas
-        ctx.clearRect(0, 0, width, height);
-
-        // Draw grid
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.lineWidth = 1;
-        for (let i = 0; i < 5; i++) {
-            const y = padding + (height - 2 * padding) * i / 4;
-            ctx.beginPath();
-            ctx.moveTo(padding, y);
-            ctx.lineTo(width - padding, y);
-            ctx.stroke();
-        }
-
-        // Draw line chart
-        ctx.beginPath();
-        ctx.strokeStyle = '#87CEEB';
-        ctx.lineWidth = 3;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        const stepX = (width - 2 * padding) / (dataPoints - 1);
-        const maxValue = Math.max(...chartData);
-        const minValue = Math.min(...chartData);
-        const range = maxValue - minValue || 1;
-
-        chartData.forEach((value, index) => {
-            const x = padding + index * stepX;
-            const y = height - padding - ((value - minValue) / range) * (height - 2 * padding);
-
-            if (index === 0) {
-                ctx.moveTo(x, y);
+        let displayValue;
+        if (isCurrency) {
+            if (isLargeNumber) {
+                displayValue = `$${(current / 1000000).toFixed(1)}M`;
             } else {
-                ctx.lineTo(x, y);
+                displayValue = `$${Math.floor(current).toLocaleString()}`;
             }
-        });
+        } else {
+            displayValue = Math.floor(current).toLocaleString();
+        }
 
-        ctx.stroke();
-
-        // Draw gradient fill
-        const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
-        gradient.addColorStop(0, 'rgba(135, 206, 235, 0.3)');
-        gradient.addColorStop(1, 'rgba(135, 206, 235, 0)');
-
-        ctx.lineTo(width - padding, height - padding);
-        ctx.lineTo(padding, height - padding);
-        ctx.closePath();
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        // Draw dots
-        ctx.fillStyle = '#87CEEB';
-        chartData.forEach((value, index) => {
-            const x = padding + index * stepX;
-            const y = height - padding - ((value - minValue) / range) * (height - 2 * padding);
-
-            if (index === dataPoints - 1) {
-                // Highlight last point
-                ctx.beginPath();
-                ctx.arc(x, y, 6, 0, Math.PI * 2);
-                ctx.fillStyle = '#87CEEB';
-                ctx.fill();
-
-                // Pulse effect
-                ctx.beginPath();
-                ctx.arc(x, y, 10, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(135, 206, 235, 0.3)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            }
-        });
-    }
-
-    function updateChart() {
-        // Shift data and add new point
-        chartData.shift();
-        chartData.push(chartData[chartData.length - 1] + (Math.random() - 0.5) * 20);
-
-        // Keep values in reasonable range
-        chartData[chartData.length - 1] = Math.max(30, Math.min(180, chartData[chartData.length - 1]));
-
-        drawChart();
-    }
-
-    // Initial draw
-    drawChart();
-
-    // Update chart periodically
-    setInterval(updateChart, 2000);
+        element.textContent = displayValue;
+    }, stepDuration);
 }
 
-// Dashboard Chart Animation
-const dashboardChartCanvas = document.getElementById('dashboardChart');
-if (dashboardChartCanvas) {
-    const ctx = dashboardChartCanvas.getContext('2d');
-    dashboardChartCanvas.width = dashboardChartCanvas.parentElement.offsetWidth - 40;
-    dashboardChartCanvas.height = 160;
+// ========================================
+// Live Demo Section
+// ========================================
+function initDemo() {
+    const auctionTimer = document.getElementById('auctionTimer');
+    const currentBid = document.getElementById('currentBid');
+    const bidList = document.getElementById('bidList');
+    const bidInput = document.getElementById('bidInput');
+    const placeBidBtn = document.getElementById('placeBidBtn');
 
-    const data = [
-        { label: 'Mon', value: 45 },
-        { label: 'Tue', value: 62 },
-        { label: 'Wed', value: 55 },
-        { label: 'Thu', value: 78 },
-        { label: 'Fri', value: 85 },
-        { label: 'Sat', value: 92 },
-        { label: 'Sun', value: 88 }
+    if (!auctionTimer) return;
+
+    // Countdown timer
+    let timeLeft = 9930; // 2:45:30 in seconds
+
+    function updateTimer() {
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const seconds = timeLeft % 60;
+
+        auctionTimer.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeLeft > 0) {
+            timeLeft--;
+            setTimeout(updateTimer, 1000);
+        }
+    }
+
+    updateTimer();
+
+    // Simulated bids
+    const bidders = [
+        '0x8a2f...3c91',
+        '0x3b7c...9f42',
+        '0x5d1e...7a83',
+        '0x9c4a...2b15',
+        '0x7f2d...8e67'
     ];
 
-    function drawDashboardChart() {
-        const width = dashboardChartCanvas.width;
-        const height = dashboardChartCanvas.height;
-        const padding = 30;
-        const barWidth = (width - 2 * padding) / data.length * 0.7;
-        const gap = (width - 2 * padding) / data.length * 0.3;
+    let currentBidValue = 24250;
 
-        // Clear canvas
-        ctx.clearRect(0, 0, width, height);
+    function simulateBid() {
+        if (currentBidValue <= 23000) return;
 
-        // Draw bars
-        const maxValue = Math.max(...data.map(d => d.value));
+        const reduction = Math.floor(Math.random() * 100) + 50;
+        currentBidValue -= reduction;
 
-        data.forEach((item, index) => {
-            const x = padding + index * (barWidth + gap);
-            const barHeight = (item.value / maxValue) * (height - 2 * padding);
-            const y = height - padding - barHeight;
+        const bidder = bidders[Math.floor(Math.random() * bidders.length)];
+        const discount = (((25000 - currentBidValue) / 25000) * 100).toFixed(1);
 
-            // Create gradient for bars
-            const gradient = ctx.createLinearGradient(x, y, x, height - padding);
-            gradient.addColorStop(0, '#93C572');
-            gradient.addColorStop(1, 'rgba(147, 197, 114, 0.3)');
+        // Update current bid display
+        currentBid.textContent = `$${currentBidValue.toLocaleString()}`;
+        document.querySelector('.bid-discount').textContent = `${discount}% discount`;
 
-            // Draw bar
-            ctx.fillStyle = gradient;
-            ctx.fillRect(x, y, barWidth, barHeight);
+        // Add new bid to list
+        const newBid = document.createElement('div');
+        newBid.className = 'bid-item';
+        newBid.innerHTML = `
+            <span class="bidder">${bidder}</span>
+            <span class="bid-amount">$${currentBidValue.toLocaleString()}</span>
+            <span class="bid-time">Just now</span>
+        `;
+        newBid.style.opacity = '0';
+        newBid.style.transform = 'translateY(-10px)';
 
-            // Draw label
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-            ctx.font = '11px Inter';
-            ctx.textAlign = 'center';
-            ctx.fillText(item.label, x + barWidth / 2, height - padding + 15);
-        });
-    }
+        bidList.insertBefore(newBid, bidList.firstChild);
 
-    drawDashboardChart();
-}
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero-visual');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-});
-
-// Dynamic market stats update (simulated)
-function updateMarketStats() {
-    const btcValue = document.querySelector('.stat-item.positive .stat-value');
-    const ethValue = document.querySelector('.stat-item.negative .stat-value');
-    const btcChange = document.querySelector('.stat-item.positive .stat-change');
-    const ethChange = document.querySelector('.stat-item.negative .stat-change');
-
-    if (btcValue && ethValue) {
-        setInterval(() => {
-            // BTC update
-            const currentBTC = parseFloat(btcValue.textContent.replace('$', '').replace(',', ''));
-            const btcFluctuation = (Math.random() - 0.5) * 100;
-            const newBTC = currentBTC + btcFluctuation;
-            btcValue.textContent = `$${newBTC.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
-
-            // ETH update
-            const currentETH = parseFloat(ethValue.textContent.replace('$', '').replace(',', ''));
-            const ethFluctuation = (Math.random() - 0.5) * 50;
-            const newETH = currentETH + ethFluctuation;
-            ethValue.textContent = `$${newETH.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
-
-            // Update change percentages with random values
-            const btcChangeValue = (Math.random() * 5 - 1).toFixed(1);
-            const ethChangeValue = (Math.random() * 5 - 3).toFixed(1);
-
-            btcChange.textContent = `${btcChangeValue > 0 ? '+' : ''}${btcChangeValue}%`;
-            ethChange.textContent = `${ethChangeValue > 0 ? '+' : ''}${ethChangeValue}%`;
-        }, 5000);
-    }
-}
-
-updateMarketStats();
-
-// Add floating animation to feature cards on hover
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.animation = 'none';
+        // Animate new bid
         setTimeout(() => {
-            this.style.animation = '';
+            newBid.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            newBid.style.opacity = '1';
+            newBid.style.transform = 'translateY(0)';
         }, 10);
-    });
-});
 
-// Particle effect for hero background (optional performance-friendly version)
-class ParticleSystem {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.particles = [];
-        this.init();
-    }
-
-    init() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-
-        for (let i = 0; i < 50; i++) {
-            this.particles.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.5 + 0.2
-            });
+        // Remove old bids if too many
+        if (bidList.children.length > 5) {
+            bidList.removeChild(bidList.lastChild);
         }
 
-        this.animate();
-    }
-
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.particles.forEach(particle => {
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-
-            // Wrap around edges
-            if (particle.x < 0) particle.x = this.canvas.width;
-            if (particle.x > this.canvas.width) particle.x = 0;
-            if (particle.y < 0) particle.y = this.canvas.height;
-            if (particle.y > this.canvas.height) particle.y = 0;
-
-            // Draw particle
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = `rgba(135, 206, 235, ${particle.opacity})`;
-            this.ctx.fill();
-        });
-
-        // Draw connections
-        this.particles.forEach((p1, i) => {
-            this.particles.slice(i + 1).forEach(p2 => {
-                const dx = p1.x - p2.x;
-                const dy = p1.y - p2.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 150) {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p1.x, p1.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(135, 206, 235, ${0.2 * (1 - distance / 150)})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.stroke();
+        // Update existing bid times
+        Array.from(bidList.children).forEach((bid, index) => {
+            if (index > 0) {
+                const timeSpan = bid.querySelector('.bid-time');
+                const currentTime = timeSpan.textContent;
+                if (currentTime === 'Just now') {
+                    timeSpan.textContent = '1m ago';
+                } else {
+                    const minutes = parseInt(currentTime) || 1;
+                    timeSpan.textContent = `${minutes + 1}m ago`;
                 }
-            });
+            }
         });
 
-        requestAnimationFrame(() => this.animate());
+        // Schedule next simulated bid
+        const nextBidDelay = Math.random() * 10000 + 5000;
+        setTimeout(simulateBid, nextBidDelay);
+    }
+
+    // Start simulated bidding after 3 seconds
+    setTimeout(simulateBid, 3000);
+
+    // User bid placement
+    if (placeBidBtn && bidInput) {
+        placeBidBtn.addEventListener('click', () => {
+            const userBid = parseInt(bidInput.value);
+
+            if (isNaN(userBid) || userBid >= currentBidValue) {
+                // Show error feedback
+                bidInput.style.borderColor = '#ff4444';
+                bidInput.style.animation = 'shake 0.5s ease';
+
+                setTimeout(() => {
+                    bidInput.style.borderColor = '';
+                    bidInput.style.animation = '';
+                }, 500);
+                return;
+            }
+
+            // Update current bid
+            currentBidValue = userBid;
+            const discount = (((25000 - currentBidValue) / 25000) * 100).toFixed(1);
+
+            currentBid.textContent = `$${currentBidValue.toLocaleString()}`;
+            document.querySelector('.bid-discount').textContent = `${discount}% discount`;
+
+            // Add user bid to list
+            const userBidItem = document.createElement('div');
+            userBidItem.className = 'bid-item';
+            userBidItem.style.background = 'rgba(99, 102, 241, 0.2)';
+            userBidItem.innerHTML = `
+                <span class="bidder">You</span>
+                <span class="bid-amount">$${userBid.toLocaleString()}</span>
+                <span class="bid-time">Just now</span>
+            `;
+
+            bidList.insertBefore(userBidItem, bidList.firstChild);
+
+            // Clear input
+            bidInput.value = '';
+
+            // Success feedback
+            placeBidBtn.textContent = 'Bid Placed!';
+            placeBidBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+
+            setTimeout(() => {
+                placeBidBtn.textContent = 'Place Bid';
+                placeBidBtn.style.background = '';
+            }, 2000);
+        });
     }
 }
 
-// Create particle canvas (optional - can be disabled for better performance)
-const createParticleCanvas = () => {
-    const canvas = document.createElement('canvas');
-    canvas.style.position = 'absolute';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.opacity = '0.4';
+// ========================================
+// Smooth Scroll
+// ========================================
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
 
-    const heroSection = document.querySelector('.hero');
-    if (heroSection) {
-        heroSection.insertBefore(canvas, heroSection.firstChild);
-        new ParticleSystem(canvas);
-    }
-};
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
 
-// Initialize particles only on larger screens for performance
-if (window.innerWidth > 1024) {
-    createParticleCanvas();
-}
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = targetElement.offsetTop - navHeight - 20;
 
-// Handle window resize
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        // Redraw charts on resize
-        if (liveChartCanvas) {
-            liveChartCanvas.width = liveChartCanvas.parentElement.offsetWidth - 40;
-            drawChart();
-        }
-        if (dashboardChartCanvas) {
-            dashboardChartCanvas.width = dashboardChartCanvas.parentElement.offsetWidth - 40;
-            drawDashboardChart();
-        }
-    }, 250);
-});
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
 
-// Add loading animation
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// CTA button interactions
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        ripple.style.position = 'absolute';
-        ripple.style.borderRadius = '50%';
-        ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-        ripple.style.width = '20px';
-        ripple.style.height = '20px';
-        ripple.style.transform = 'scale(0)';
-        ripple.style.animation = 'ripple 0.6s ease-out';
-
-        const rect = this.getBoundingClientRect();
-        ripple.style.left = (e.clientX - rect.left - 10) + 'px';
-        ripple.style.top = (e.clientY - rect.top - 10) + 'px';
-
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 600);
+                // Close mobile menu if open
+                document.querySelector('.nav-links')?.classList.remove('active');
+                document.getElementById('mobileMenuBtn')?.classList.remove('active');
+            }
+        });
     });
-});
+}
 
-// Add ripple animation to CSS dynamically
+// ========================================
+// Wallet Connection (Simulated)
+// ========================================
+const connectWalletBtn = document.getElementById('connectWallet');
+
+if (connectWalletBtn) {
+    connectWalletBtn.addEventListener('click', async () => {
+        // Check if MetaMask is installed
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                const accounts = await window.ethereum.request({
+                    method: 'eth_requestAccounts'
+                });
+
+                const address = accounts[0];
+                const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
+
+                connectWalletBtn.innerHTML = `
+                    <span class="wallet-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                    </span>
+                    ${shortAddress}
+                `;
+                connectWalletBtn.style.borderColor = 'var(--accent-green)';
+                connectWalletBtn.style.color = 'var(--accent-green)';
+
+            } catch (error) {
+                console.error('Wallet connection failed:', error);
+            }
+        } else {
+            // Show install MetaMask prompt
+            alert('Please install MetaMask to connect your wallet!');
+            window.open('https://metamask.io/', '_blank');
+        }
+    });
+}
+
+// ========================================
+// Utility: Shake Animation
+// ========================================
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
     }
 `;
 document.head.appendChild(style);
 
-console.log('🚀 Traders Dex initialized successfully!');
+// ========================================
+// Performance: Reduce animations on low-end devices
+// ========================================
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.style.setProperty('--transition-fast', '0s');
+    document.documentElement.style.setProperty('--transition-normal', '0s');
+    document.documentElement.style.setProperty('--transition-slow', '0s');
+}
+
+// Console branding
+console.log(
+    '%c InvoiceFlow %c Decentralized Invoice Financing ',
+    'background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; padding: 5px 10px; border-radius: 5px 0 0 5px; font-weight: bold;',
+    'background: #1a1a2e; color: #818cf8; padding: 5px 10px; border-radius: 0 5px 5px 0;'
+);

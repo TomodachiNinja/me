@@ -3,287 +3,528 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traders Dex - Master the Markets with Real-Time Insights</title>
+    <title>InvoiceFlow - Decentralized Invoice Financing</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo">
-                    <span class="logo-icon">📈</span>
-                    <span class="logo-text">Traders<span class="highlight">Dex</span></span>
-                </div>
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" fill="none">
+                            <rect x="4" y="8" width="32" height="24" rx="2" stroke="url(#logo-gradient)" stroke-width="2"/>
+                            <path d="M4 14h32M12 20h16M12 26h10" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="32" cy="8" r="6" fill="url(#logo-gradient)"/>
+                            <path d="M30 8l1.5 1.5L34 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1"/>
+                                    <stop offset="100%" stop-color="#8b5cf6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Invoice<span class="highlight">Flow</span></span>
+                </a>
                 <ul class="nav-links">
+                    <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#analytics">Analytics</a></li>
-                    <li><a href="#learn">Learn</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#demo">Live Demo</a></li>
                 </ul>
                 <div class="nav-cta">
-                    <button class="btn btn-secondary">Sign In</button>
-                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-ghost" id="connectWallet">
+                        <span class="wallet-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="6" width="20" height="14" rx="2"/>
+                                <path d="M16 14a2 2 0 100-4 2 2 0 000 4z"/>
+                                <path d="M2 10h4"/>
+                            </svg>
+                        </span>
+                        Connect Wallet
+                    </button>
+                    <button class="btn btn-primary">Launch App</button>
                 </div>
-                <div class="mobile-menu-toggle">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg-animation"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="badge">🚀 AI-Powered Trading Platform</div>
-                    <h1 class="hero-title">
-                        Master the Markets with
-                        <span class="gradient-text">Real-Time Intelligence</span>
-                    </h1>
-                    <p class="hero-description">
-                        Transform your trading journey with AI-driven insights, live market analysis,
-                        and personalized learning that adapts to current market conditions.
-                    </p>
-                    <div class="hero-cta">
-                        <button class="btn btn-primary btn-large">
-                            Start Trading Now
-                            <span class="btn-icon">→</span>
-                        </button>
-                        <button class="btn btn-outline btn-large">
-                            <span class="play-icon">▶</span>
-                            Watch Demo
-                        </button>
-                    </div>
-                    <div class="trust-indicators">
-                        <div class="trust-item">
-                            <span class="trust-number" data-target="50000">0</span>
-                            <span class="trust-label">Active Traders</span>
-                        </div>
-                        <div class="trust-item">
-                            <span class="trust-number">$<span data-target="2.5">0</span>B</span>
-                            <span class="trust-label">Trading Volume</span>
-                        </div>
-                        <div class="trust-item">
-                            <span class="trust-number" data-target="98">0</span>%
-                            <span class="trust-label">Success Rate</span>
-                        </div>
-                    </div>
+    <!-- Hero Section with Parallax -->
+    <section class="hero" id="hero">
+        <div class="parallax-layer layer-back" data-speed="0.1">
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="parallax-layer layer-mid" data-speed="0.3">
+            <div class="floating-cards">
+                <div class="float-card card-1">
+                    <div class="card-glow"></div>
+                    <span class="card-icon">📄</span>
+                    <span class="card-label">Invoice #1042</span>
+                    <span class="card-value">$25,000</span>
                 </div>
-                <div class="hero-visual">
-                    <div class="trading-card">
-                        <div class="card-header">
-                            <h3>Live Market Pulse</h3>
-                            <span class="status-badge">● LIVE</span>
-                        </div>
-                        <div class="chart-placeholder">
-                            <canvas id="liveChart"></canvas>
-                        </div>
-                        <div class="market-stats">
-                            <div class="stat-item positive">
-                                <span class="stat-label">BTC/USD</span>
-                                <span class="stat-value">$67,234.50</span>
-                                <span class="stat-change">+2.4%</span>
-                            </div>
-                            <div class="stat-item negative">
-                                <span class="stat-label">ETH/USD</span>
-                                <span class="stat-value">$3,456.80</span>
-                                <span class="stat-change">-1.2%</span>
-                            </div>
-                        </div>
+                <div class="float-card card-2">
+                    <div class="card-glow"></div>
+                    <span class="card-icon">🔗</span>
+                    <span class="card-label">NFT Minted</span>
+                    <span class="card-status">Verified</span>
+                </div>
+                <div class="float-card card-3">
+                    <div class="card-glow"></div>
+                    <span class="card-icon">💰</span>
+                    <span class="card-label">Funded</span>
+                    <span class="card-value">2.5% APY</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content parallax-layer layer-front" data-speed="0.5">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Built on Ethereum Sepolia</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Transform Invoices</span>
+                    <span class="title-line">Into <span class="gradient-text">Liquid Assets</span></span>
+                </h1>
+                <p class="hero-description">
+                    Tokenize your invoices as NFTs and access instant liquidity through decentralized auctions.
+                    Suppliers get funded faster, investors earn competitive yields.
+                </p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary btn-large btn-glow">
+                        <span>Start Tokenizing</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-outline btn-large">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                        <span>Watch Demo</span>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="2500000">$0</span>
+                        <span class="stat-label">Total Volume</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="1247">0</span>
+                        <span class="stat-label">Invoices Funded</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="98">0</span>
+                        <span class="stat-label">Success Rate %</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
             <span>Scroll to explore</span>
-            <div class="scroll-arrow">↓</div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PROCESS</span>
+                <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+                <p class="section-subtitle">Three simple steps to unlock your invoice value</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-line">
+                    <div class="line-progress" id="lineProgress"></div>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card" data-step="1">
+                        <div class="step-number">
+                            <span>01</span>
+                            <div class="step-ring"></div>
+                        </div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <rect x="12" y="8" width="40" height="48" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 20h24M20 28h24M20 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="44" cy="44" r="12" fill="url(#step1-gradient)"/>
+                                <path d="M40 44l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs>
+                                    <linearGradient id="step1-gradient" x1="32" y1="32" x2="56" y2="56">
+                                        <stop stop-color="#6366f1"/>
+                                        <stop offset="1" stop-color="#8b5cf6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Mint Invoice NFT</h3>
+                        <p>Upload your invoice details and mint it as a unique NFT on the blockchain. Immutable, verifiable, tradeable.</p>
+                    </div>
+                    <div class="step-card" data-step="2">
+                        <div class="step-number">
+                            <span>02</span>
+                            <div class="step-ring"></div>
+                        </div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2"/>
+                                <path d="M32 16v16l12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="32" cy="32" r="4" fill="url(#step2-gradient)"/>
+                                <path d="M20 52l-4 8M44 52l4 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="step2-gradient" x1="28" y1="28" x2="36" y2="36">
+                                        <stop stop-color="#10b981"/>
+                                        <stop offset="1" stop-color="#059669"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Start Auction</h3>
+                        <p>Launch a reverse auction where investors compete to offer the best financing rate for your invoice.</p>
+                    </div>
+                    <div class="step-card" data-step="3">
+                        <div class="step-number">
+                            <span>03</span>
+                            <div class="step-ring"></div>
+                        </div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <rect x="8" y="24" width="48" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 36h48" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="44" cy="16" r="12" fill="url(#step3-gradient)"/>
+                                <path d="M44 12v8M40 16h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="16" y="44" width="12" height="4" rx="1" fill="currentColor"/>
+                                <defs>
+                                    <linearGradient id="step3-gradient" x1="32" y1="4" x2="56" y2="28">
+                                        <stop stop-color="#f59e0b"/>
+                                        <stop offset="1" stop-color="#d97706"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Get Funded</h3>
+                        <p>Accept the best bid and receive instant funding. When your buyer pays, the investor gets their return.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section with Parallax Cards -->
+    <section class="features" id="features">
+        <div class="features-bg parallax-bg" data-speed="0.2"></div>
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">FEATURES</span>
-                <h2 class="section-title">Everything You Need to <span class="gradient-text">Succeed</span></h2>
-                <p class="section-description">
-                    Powerful tools and insights designed to maximize your trading potential
-                </p>
+                <h2 class="section-title">Built for <span class="gradient-text">Modern Finance</span></h2>
+                <p class="section-subtitle">Enterprise-grade features with DeFi simplicity</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);">
-                        📊
+                <div class="feature-card feature-large">
+                    <div class="feature-visual">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span class="file-name">InvoiceNFT.sol</span>
+                            </div>
+                            <pre class="code-content"><code><span class="keyword">function</span> <span class="function">mintInvoice</span>(
+    <span class="type">bytes32</span> invoiceHash,
+    <span class="type">address</span> buyer,
+    <span class="type">uint256</span> amount,
+    <span class="type">uint256</span> dueDate
+) <span class="keyword">external</span> <span class="modifier">onlyOwner</span> {
+    <span class="comment">// Mint unique invoice NFT</span>
+    _mint(msg.sender, tokenId);
+}</code></pre>
+                        </div>
                     </div>
-                    <h3>Real-Time Analytics</h3>
-                    <p>Get instant market insights with AI-powered analysis that adapts to live market conditions and trends.</p>
-                    <a href="#" class="feature-link">Learn more →</a>
+                    <div class="feature-content">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3>Smart Contract Powered</h3>
+                        <p>Built on auditable, transparent smart contracts. Every transaction is verifiable on-chain with complete immutability.</p>
+                        <a href="#" class="feature-link">
+                            View on Etherscan
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #93C572 0%, #6B9E4E 100%);">
-                        🎓
+                    <div class="feature-icon-wrapper green">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
                     </div>
-                    <h3>Adaptive Learning</h3>
-                    <p>Personalized courses that evolve with market dynamics, teaching you strategies that work right now.</p>
-                    <a href="#" class="feature-link">Learn more →</a>
+                    <h3>Fraud Protection</h3>
+                    <p>Unique invoice hashes prevent duplicate financing. Each invoice can only be tokenized once.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);">
-                        🎯
+                    <div class="feature-icon-wrapper orange">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
                     </div>
-                    <h3>Profit Optimization</h3>
-                    <p>AI-driven recommendations to maximize returns and minimize risks based on your trading style.</p>
-                    <a href="#" class="feature-link">Learn more →</a>
+                    <h3>Real-Time Auctions</h3>
+                    <p>Dynamic bidding with instant settlement. Watch investors compete for the best rate live.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #FFB347 0%, #FF8C00 100%);">
-                        ⚡
+                    <div class="feature-icon-wrapper pink">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                                <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                            </svg>
+                        </div>
                     </div>
-                    <h3>Lightning Execution</h3>
-                    <p>Execute trades in milliseconds with our advanced infrastructure and real-time data feeds.</p>
-                    <a href="#" class="feature-link">Learn more →</a>
+                    <h3>NFT Ownership</h3>
+                    <p>True digital ownership of invoice rights. Transfer, trade, or hold - your assets, your choice.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);">
-                        🔒
+                    <div class="feature-icon-wrapper cyan">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            </svg>
+                        </div>
                     </div>
-                    <h3>Bank-Grade Security</h3>
-                    <p>Your assets protected with military-grade encryption and multi-layer security protocols.</p>
-                    <a href="#" class="feature-link">Learn more →</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #93C572 0%, #6B9E4E 100%);">
-                        📱
-                    </div>
-                    <h3>Trade Anywhere</h3>
-                    <p>Seamless experience across all devices with our powerful mobile and desktop applications.</p>
-                    <a href="#" class="feature-link">Learn more →</a>
+                    <h3>Instant Settlement</h3>
+                    <p>No waiting for bank transfers. Funds transfer instantly when auctions close via smart contract.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Analytics Dashboard Preview -->
-    <section id="analytics" class="analytics">
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
         <div class="container">
-            <div class="analytics-wrapper">
-                <div class="analytics-content">
-                    <span class="section-tag">ANALYTICS</span>
-                    <h2 class="section-title">Market Intelligence at <span class="gradient-text">Your Fingertips</span></h2>
-                    <p class="section-description">
-                        Harness the power of real-time data, advanced charting, and AI predictions to make informed decisions.
-                    </p>
-                    <div class="analytics-features">
-                        <div class="analytics-feature">
-                            <div class="check-icon">✓</div>
-                            <div>
-                                <h4>Live Market Signals</h4>
-                                <p>Receive instant notifications on trending opportunities</p>
+            <div class="benefits-wrapper">
+                <div class="benefits-visual">
+                    <div class="benefits-card suppliers">
+                        <div class="card-header">
+                            <span class="card-icon">🏭</span>
+                            <h4>For Suppliers</h4>
+                        </div>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Get paid in hours, not months</span>
+                            </div>
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Competitive rates via auctions</span>
+                            </div>
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>No credit checks required</span>
+                            </div>
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Full control over your invoices</span>
                             </div>
                         </div>
-                        <div class="analytics-feature">
-                            <div class="check-icon">✓</div>
-                            <div>
-                                <h4>Pattern Recognition</h4>
-                                <p>AI identifies profitable patterns before they peak</p>
-                            </div>
-                        </div>
-                        <div class="analytics-feature">
-                            <div class="check-icon">✓</div>
-                            <div>
-                                <h4>Risk Assessment</h4>
-                                <p>Real-time portfolio analysis and risk management</p>
-                            </div>
+                        <div class="card-metric">
+                            <span class="metric-value">24h</span>
+                            <span class="metric-label">Average Funding Time</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Explore Analytics</button>
+                    <div class="benefits-card investors">
+                        <div class="card-header">
+                            <span class="card-icon">💼</span>
+                            <h4>For Investors</h4>
+                        </div>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Earn yields on real assets</span>
+                            </div>
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Short-term, predictable returns</span>
+                            </div>
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Diversified invoice portfolio</span>
+                            </div>
+                            <div class="benefit-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                <span>Transparent on-chain records</span>
+                            </div>
+                        </div>
+                        <div class="card-metric">
+                            <span class="metric-value">8-15%</span>
+                            <span class="metric-label">Average APY</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="analytics-visual">
-                    <div class="dashboard-mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <span class="mockup-title">Trading Dashboard</span>
+                <div class="benefits-content">
+                    <span class="section-tag">BENEFITS</span>
+                    <h2 class="section-title">Win-Win for <span class="gradient-text">Everyone</span></h2>
+                    <p class="section-description">
+                        InvoiceFlow creates a marketplace where suppliers access quick capital and investors
+                        earn returns backed by real business transactions.
+                    </p>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-number">$2.5M+</span>
+                            <span class="stat-text">Invoices Financed</span>
                         </div>
-                        <div class="mockup-content">
-                            <div class="metric-cards">
-                                <div class="metric-card">
-                                    <span class="metric-label">Portfolio Value</span>
-                                    <span class="metric-value">$124,567</span>
-                                    <span class="metric-change positive">+12.5%</span>
-                                </div>
-                                <div class="metric-card">
-                                    <span class="metric-label">Today's Profit</span>
-                                    <span class="metric-value">$2,340</span>
-                                    <span class="metric-change positive">+5.8%</span>
-                                </div>
-                            </div>
-                            <div class="mockup-chart">
-                                <canvas id="dashboardChart"></canvas>
-                            </div>
+                        <div class="stat-box">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-text">Active Users</span>
                         </div>
                     </div>
+                    <button class="btn btn-primary btn-large">
+                        Join the Platform
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Learning Platform -->
-    <section id="learn" class="learning">
+    <!-- Live Demo Section -->
+    <section class="demo" id="demo">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">LEARN</span>
-                <h2 class="section-title">Learn from the <span class="gradient-text">Market's Pulse</span></h2>
-                <p class="section-description">
-                    Our adaptive learning system teaches you strategies based on current market conditions
-                </p>
+                <span class="section-tag">LIVE DEMO</span>
+                <h2 class="section-title">Try It <span class="gradient-text">Now</span></h2>
+                <p class="section-subtitle">Experience the platform with a simulated invoice auction</p>
             </div>
-            <div class="learning-grid">
-                <div class="learning-card">
-                    <div class="learning-image">
-                        <div class="learning-badge">BEGINNER</div>
+            <div class="demo-container">
+                <div class="demo-panel invoice-panel">
+                    <div class="panel-header">
+                        <h3>Invoice Details</h3>
+                        <span class="panel-badge">NFT #1042</span>
                     </div>
-                    <div class="learning-content">
-                        <h3>Market Fundamentals</h3>
-                        <p>Master the basics with real-world examples from today's markets</p>
-                        <div class="learning-meta">
-                            <span>⏱ 12 lessons</span>
-                            <span>👥 45K students</span>
+                    <div class="invoice-preview">
+                        <div class="invoice-row">
+                            <span class="label">Invoice Hash</span>
+                            <span class="value hash">0x7f83...e2a4</span>
+                        </div>
+                        <div class="invoice-row">
+                            <span class="label">Supplier</span>
+                            <span class="value">Acme Corp</span>
+                        </div>
+                        <div class="invoice-row">
+                            <span class="label">Buyer</span>
+                            <span class="value">TechStart Inc</span>
+                        </div>
+                        <div class="invoice-row highlight">
+                            <span class="label">Amount</span>
+                            <span class="value amount">$25,000</span>
+                        </div>
+                        <div class="invoice-row">
+                            <span class="label">Due Date</span>
+                            <span class="value">March 15, 2026</span>
+                        </div>
+                        <div class="invoice-row">
+                            <span class="label">Status</span>
+                            <span class="value status-badge">In Auction</span>
                         </div>
                     </div>
                 </div>
-                <div class="learning-card">
-                    <div class="learning-image intermediate">
-                        <div class="learning-badge">INTERMEDIATE</div>
-                    </div>
-                    <div class="learning-content">
-                        <h3>Technical Analysis</h3>
-                        <p>Advanced charting and pattern recognition in live markets</p>
-                        <div class="learning-meta">
-                            <span>⏱ 24 lessons</span>
-                            <span>👥 32K students</span>
+                <div class="demo-panel auction-panel">
+                    <div class="panel-header">
+                        <h3>Live Auction</h3>
+                        <div class="auction-timer">
+                            <span class="timer-icon">⏱</span>
+                            <span class="timer-value" id="auctionTimer">02:45:30</span>
                         </div>
                     </div>
-                </div>
-                <div class="learning-card">
-                    <div class="learning-image advanced">
-                        <div class="learning-badge">ADVANCED</div>
-                    </div>
-                    <div class="learning-content">
-                        <h3>AI-Driven Strategies</h3>
-                        <p>Leverage AI and machine learning for competitive advantage</p>
-                        <div class="learning-meta">
-                            <span>⏱ 36 lessons</span>
-                            <span>👥 18K students</span>
+                    <div class="auction-content">
+                        <div class="current-bid">
+                            <span class="bid-label">Current Best Bid</span>
+                            <div class="bid-value-wrapper">
+                                <span class="bid-value" id="currentBid">$24,250</span>
+                                <span class="bid-discount">3% discount</span>
+                            </div>
+                        </div>
+                        <div class="bid-history">
+                            <h4>Recent Bids</h4>
+                            <div class="bid-list" id="bidList">
+                                <div class="bid-item">
+                                    <span class="bidder">0x8a2f...3c91</span>
+                                    <span class="bid-amount">$24,250</span>
+                                    <span class="bid-time">Just now</span>
+                                </div>
+                                <div class="bid-item">
+                                    <span class="bidder">0x3b7c...9f42</span>
+                                    <span class="bid-amount">$24,500</span>
+                                    <span class="bid-time">2m ago</span>
+                                </div>
+                                <div class="bid-item">
+                                    <span class="bidder">0x5d1e...7a83</span>
+                                    <span class="bid-amount">$24,750</span>
+                                    <span class="bid-time">5m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="place-bid">
+                            <div class="bid-input-wrapper">
+                                <span class="currency">$</span>
+                                <input type="number" id="bidInput" placeholder="24,000" value="24000">
+                            </div>
+                            <button class="btn btn-primary" id="placeBidBtn">Place Bid</button>
                         </div>
                     </div>
                 </div>
@@ -291,29 +532,46 @@
         </div>
     </section>
 
-    <!-- Statistics -->
-    <section class="statistics">
+    <!-- Tech Stack Section -->
+    <section class="tech-stack">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">💎</div>
-                    <h3 class="stat-number" data-target="99.9">0</h3>
-                    <p class="stat-label">Uptime %</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🌍</div>
-                    <h3 class="stat-number" data-target="150">0</h3>
-                    <p class="stat-label">Countries Served</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⚡</div>
-                    <h3 class="stat-number" data-target="1">0</h3>
-                    <p class="stat-label">Million+ Trades/Day</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
-                    <h3 class="stat-number" data-target="24">0</h3>
-                    <p class="stat-label">Awards Won</p>
+            <div class="tech-wrapper">
+                <span class="tech-label">Powered by</span>
+                <div class="tech-logos">
+                    <div class="tech-item">
+                        <svg viewBox="0 0 40 40" class="eth-logo">
+                            <path d="M20 4l-12 16 12 7 12-7-12-16z" fill="#627EEA"/>
+                            <path d="M20 4v16.5l12-7-12-9.5z" fill="#627EEA" opacity="0.6"/>
+                            <path d="M20 23l-12-3 12 16 12-16-12 3z" fill="#627EEA"/>
+                            <path d="M20 23v13l12-16-12 3z" fill="#627EEA" opacity="0.6"/>
+                        </svg>
+                        <span>Ethereum</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 40 40" class="solidity-logo">
+                            <path d="M26 8l-8 14h-8l8-14h8z" fill="#363636" opacity="0.5"/>
+                            <path d="M18 8l-8 14h8l8-14h-8z" fill="#363636"/>
+                            <path d="M14 32l8-14h8l-8 14h-8z" fill="#363636" opacity="0.5"/>
+                            <path d="M22 32l8-14h-8l-8 14h8z" fill="#363636"/>
+                        </svg>
+                        <span>Solidity</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 40 40" class="oz-logo">
+                            <circle cx="20" cy="20" r="16" stroke="#4E5EE4" stroke-width="2" fill="none"/>
+                            <path d="M20 8v24M8 20h24" stroke="#4E5EE4" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="6" fill="#4E5EE4"/>
+                        </svg>
+                        <span>OpenZeppelin</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 40 40" class="hardhat-logo">
+                            <path d="M8 28l12-20 12 20H8z" fill="#FFF100"/>
+                            <path d="M20 8l12 20H20V8z" fill="#E8D900"/>
+                            <rect x="14" y="20" width="12" height="8" fill="#1A1A1A"/>
+                        </svg>
+                        <span>Hardhat</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -321,15 +579,28 @@
 
     <!-- CTA Section -->
     <section class="cta">
+        <div class="cta-bg">
+            <div class="cta-orb orb-1"></div>
+            <div class="cta-orb orb-2"></div>
+        </div>
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Transform Your Trading?</h2>
-                <p>Join thousands of successful traders using Traders Dex to maximize their profits</p>
+                <h2>Ready to <span class="gradient-text">Revolutionize</span> Your Cash Flow?</h2>
+                <p>Join the future of invoice financing. Get started in minutes.</p>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary btn-large">Start Free Trial</button>
-                    <button class="btn btn-outline-light btn-large">Schedule Demo</button>
+                    <button class="btn btn-white btn-large">
+                        Launch App
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-ghost-light btn-large">Read Documentation</button>
                 </div>
-                <p class="cta-note">No credit card required • 14-day free trial • Cancel anytime</p>
+                <div class="cta-features">
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No setup fees</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Instant deployment</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Open source</span>
+                </div>
             </div>
         </div>
     </section>
@@ -337,62 +608,74 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="logo">
-                        <span class="logo-icon">📈</span>
-                        <span class="logo-text">Traders<span class="highlight">Dex</span></span>
-                    </div>
-                    <p class="footer-description">
-                        Empowering traders with real-time intelligence and adaptive learning.
-                    </p>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none">
+                                <rect x="4" y="8" width="32" height="24" rx="2" stroke="url(#footer-gradient)" stroke-width="2"/>
+                                <path d="M4 14h32M12 20h16M12 26h10" stroke="url(#footer-gradient)" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="32" cy="8" r="6" fill="url(#footer-gradient)"/>
+                                <path d="M30 8l1.5 1.5L34 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs>
+                                    <linearGradient id="footer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#6366f1"/>
+                                        <stop offset="100%" stop-color="#8b5cf6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Invoice<span class="highlight">Flow</span></span>
+                    </a>
+                    <p>Decentralized invoice financing powered by blockchain technology.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link">𝕏</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Discord">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Platform</h4>
-                    <ul>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Analytics</a></li>
-                        <li><a href="#">Trading Tools</a></li>
-                        <li><a href="#">API</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Learn</h4>
-                    <ul>
-                        <li><a href="#">Courses</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Market Insights</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Press Kit</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Compliance</a></li>
-                    </ul>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">How It Works</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Developers</h4>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Smart Contracts</a></li>
+                            <li><a href="#">API Reference</a></li>
+                            <li><a href="#">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Traders Dex. All rights reserved.</p>
-                <p>Trading involves risk. Past performance does not guarantee future results.</p>
+                <p>&copy; 2026 InvoiceFlow. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
